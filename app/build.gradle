@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 
+
 android {
     compileSdkVersion 29
 
@@ -29,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -39,6 +44,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation "androidx.test:core:$androidTestCoreVersion"
+    testImplementation "io.mockk:mockk-common:$mockKVersion"
+    testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "androidx.test:runner:$androidRunnerVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    androidTestImplementation "androidx.test:rules:$coreJUnitRuleVersion"
+    testImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
