@@ -2,4 +2,6 @@
     <string name="app_name">Grow Again</string>
 
     <string name="hello_world">Hello World!</string>
+
+    <string name="click_to_start">Click to Start</string>
 </resources>

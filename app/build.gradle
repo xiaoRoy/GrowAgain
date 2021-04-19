@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 
@@ -52,4 +53,9 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$coreJUnitRuleVersion"
     testImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVerson"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVerson"
+
+    implementation libraies
+    kapt librariesKapt
 }
