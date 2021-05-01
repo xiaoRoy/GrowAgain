@@ -38,7 +38,8 @@ class TitleViewModel(
     val taps: LiveData<String> = _taps
 
     fun updateTitle() {
-
+        refreshTitle()
+        updateTaps()
     }
 
     private fun updateTaps() {
@@ -47,6 +48,20 @@ class TitleViewModel(
             Thread.sleep(1_000)
             _taps.postValue(tapsInString)
         }
+    }
+
+    fun refreshTitle() {
+        _isLoading.value = true
+        titleRepository.refreshTitle(object : TitleRefreshCallback {
+            override fun onCompleted() {
+               _isLoading.postValue(false)
+            }
+
+            override fun onError(cause: Throwable) {
+                _isLoading.postValue(false)
+                _message.postValue(cause.message)
+            }
+        })
     }
 
 

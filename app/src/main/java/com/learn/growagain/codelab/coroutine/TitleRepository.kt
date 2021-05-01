@@ -17,6 +17,7 @@ class TitleRepository(
                 val response = titleNetwork.fetchNextTitle().execute()
                 if(response.isSuccessful) {
                     val title: String = response.body() ?: throw IllegalStateException()
+                    titleDao.insertTitle(Title(title))
                     titleRefreshCallback.onCompleted()
                 } else {
                     titleRefreshCallback.onError(TitleRefreshError("Unable to refresh title", null))
