@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="character_item_height">32dp</dimen>
+    <dimen name="character_loading_size">50dp</dimen>
+</resources>
