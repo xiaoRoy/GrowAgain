@@ -44,7 +44,7 @@ ext {
             "androidx.work:work-runtime-ktx:$work_version",
 
             "androidx.room:room-ktx:$room_version",
-
+            "androidx.room:room-runtime:$room_version",
             "com.google.code.gson:gson:$gson_version",
             "com.squareup.retrofit2:converter-gson:$retrofit_gson_version",
             "com.squareup.retrofit2:retrofit:$retrofit_version",
