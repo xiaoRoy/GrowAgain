@@ -10,6 +10,7 @@ import com.learn.growagain.codelab.testing.model.Task
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class TaskRepository private constructor(application: Application) {
@@ -29,28 +30,47 @@ class TaskRepository private constructor(application: Application) {
         taskLocalDataSource = TaskLocalDataSource(database.taskDao())
     }
 
-    suspend fun getTasks(forceUpdate: Boolean): Result<List<Task>> {
+    suspend fun getAllTasks(forceUpdate: Boolean): Result<List<Task>> {
         if (forceUpdate) {
             try {
-                val tasksFromRemote: Result<List<Task>> = taskLocalDataSource.getTasks()
-                if(tasksFromRemote is Result.Success) {
-                    saveTaskInLocal(tasksFromRemote.data)
-                } else if( tasksFromRemote is Result.Error) {
-                    throw tasksFromRemote.exception
-                }
+                saveAllTasksToLocalFromRemote()
             } catch (exception: Exception) {
                 return Result.Error(exception)
             }
-
         }
         return taskLocalDataSource.getTasks()
     }
 
-    suspend fun saveTask(task: Task){
-        coroutineScope {  }
+    private suspend fun saveAllTasksToLocalFromRemote() {
+        val tasksFromRemote = taskRemoteDataSource.getTasks()
+        if (tasksFromRemote is Result.Success) {
+            saveTaskInLocal(tasksFromRemote.data)
+        } else if (tasksFromRemote is Result.Error) {
+            throw tasksFromRemote.exception
+        }
     }
 
     private suspend fun saveTaskInLocal(tasksFromRemote: List<Task>) {
-
+        tasksFromRemote.forEach {
+            taskLocalDataSource.saveTask(it)
+        }
     }
+
+    suspend fun reloadAllTasks() {
+        saveAllTasksToLocalFromRemote()
+    }
+
+    suspend fun saveTask(task: Task) {
+        coroutineScope {
+            //if the first task fails, the second one will be cancelled
+            //exception thrown from launch is consider as a uncaught exception
+            launch { taskRemoteDataSource.saveTask(task) }
+            launch { taskLocalDataSource.saveTask(task) }
+        }
+    }
+
+    private suspend fun saveSingleTaskToLocalFromRemote(taskId: String) {
+    }
+
+
 }
