@@ -56,19 +56,18 @@ dependencies {
 
     testImplementation 'junit:junit:4.+'
     testImplementation "androidx.test:core:$androidTestCoreVersion"
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
     testImplementation "io.mockk:mockk-common:$mockKVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
     testImplementation "androidx.test:runner:$androidRunnerVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
-    testImplementation 'androidx.test.ext:junit:1.1.1'
     testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
 
-    androidTestImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation "androidx.test:core:$androidTestCoreVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
     androidTestImplementation "com.google.truth:truth:$truthVersion"
     androidTestImplementation "androidx.test:runner:$androidRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test:rules:$coreJUnitRuleVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiautomatorVersion"
 }

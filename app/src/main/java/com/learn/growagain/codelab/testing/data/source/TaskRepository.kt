@@ -44,13 +44,13 @@ class TaskRepository private constructor(application: Application) {
     private suspend fun saveAllTasksToLocalFromRemote() {
         val tasksFromRemote = taskRemoteDataSource.getTasks()
         if (tasksFromRemote is Result.Success) {
-            saveTaskInLocal(tasksFromRemote.data)
+            saveTasksInLocal(tasksFromRemote.data)
         } else if (tasksFromRemote is Result.Error) {
             throw tasksFromRemote.exception
         }
     }
 
-    private suspend fun saveTaskInLocal(tasksFromRemote: List<Task>) {
+    private suspend fun saveTasksInLocal(tasksFromRemote: List<Task>) {
         tasksFromRemote.forEach {
             taskLocalDataSource.saveTask(it)
         }

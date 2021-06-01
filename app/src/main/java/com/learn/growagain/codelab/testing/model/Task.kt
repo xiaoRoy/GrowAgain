@@ -8,8 +8,11 @@ import java.util.*
 
 @Entity(tableName = "tasks")
 class Task(
-    private var title: String,
-    private var description: String,
+    var title: String = "",
+    var description: String = "",
     @PrimaryKey @ColumnInfo var id: String = UUID.randomUUID().toString(),
-    @ColumnInfo(name = "completed") private var isCompleted: Boolean = false
-) {}
+    @ColumnInfo(name = "completed") var isCompleted: Boolean = false
+) {
+    val isActive: Boolean
+        get() = !isCompleted
+}
