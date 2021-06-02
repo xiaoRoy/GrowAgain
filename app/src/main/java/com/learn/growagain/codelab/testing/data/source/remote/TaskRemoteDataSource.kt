@@ -27,6 +27,10 @@ object TaskRemoteDataSource: TaskDataSource {
         return Result.Success(taskList)
     }
 
+    override suspend fun deleteAllTasks() {
+        TODO("not implemented")
+    }
+
     private fun addTask(title: String, description: String) {
         val task = Task(title, description)
         TASKS[task.id] = task

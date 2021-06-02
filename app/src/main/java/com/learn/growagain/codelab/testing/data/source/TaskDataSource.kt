@@ -8,4 +8,6 @@ interface TaskDataSource {
     suspend fun getTasks(): Result<List<Task>>
 
     suspend fun saveTask(task: Task)
+
+    suspend fun deleteAllTasks()
 }
