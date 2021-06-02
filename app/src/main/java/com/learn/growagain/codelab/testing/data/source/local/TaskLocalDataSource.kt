@@ -29,4 +29,8 @@ class TaskLocalDataSource(
             taskDao.insertTask(task)
         }
     }
+
+    override suspend fun deleteAllTasks() {
+        TODO("not implemented")
+    }
 }

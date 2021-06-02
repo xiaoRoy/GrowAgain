@@ -11,24 +11,12 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class TaskRepository private constructor(application: Application) {
-
-    private val taskRemoteDataSource: TaskDataSource
-    private val taskLocalDataSource: TaskDataSource
+class TaskRepository(
+    private val taskRemoteDataSource: TaskDataSource,
+    private val taskLocalDataSource: TaskDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-
-    init {
-        val database = Room.databaseBuilder(
-            application.applicationContext,
-            TaskDataBase::class.java,
-            "Tasks.db"
-        ).build()
-
-        taskRemoteDataSource = TaskRemoteDataSource
-        taskLocalDataSource = TaskLocalDataSource(database.taskDao())
-    }
+) {
 
     suspend fun getAllTasks(forceUpdate: Boolean): Result<List<Task>> {
         if (forceUpdate) {
@@ -44,6 +32,7 @@ class TaskRepository private constructor(application: Application) {
     private suspend fun saveAllTasksToLocalFromRemote() {
         val tasksFromRemote = taskRemoteDataSource.getTasks()
         if (tasksFromRemote is Result.Success) {
+            taskLocalDataSource.deleteAllTasks()
             saveTasksInLocal(tasksFromRemote.data)
         } else if (tasksFromRemote is Result.Error) {
             throw tasksFromRemote.exception
@@ -70,6 +59,25 @@ class TaskRepository private constructor(application: Application) {
     }
 
     private suspend fun saveSingleTaskToLocalFromRemote(taskId: String) {
+    }
+
+    companion object {
+
+        @Volatile
+        private var INSTANCE: TaskRepository? = null
+
+        fun getInstance(application: Application): TaskRepository {
+            return INSTANCE ?: synchronized(this) {
+                val dataBase =
+                    Room.databaseBuilder(application, TaskDataBase::class.java, "Tasks.db").build()
+                return TaskRepository(
+                    TaskRemoteDataSource,
+                    TaskLocalDataSource(dataBase.taskDao())
+                ).also {
+                    INSTANCE = it
+                }
+            }
+        }
     }
 
 
