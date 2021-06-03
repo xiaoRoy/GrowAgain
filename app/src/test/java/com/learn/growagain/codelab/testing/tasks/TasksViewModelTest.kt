@@ -1,21 +1,23 @@
 package com.learn.growagain.codelab.testing.tasks
 
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Assert.*
+import com.learn.growagain.codelab.testing.data.FakeTaskRepository
+import com.learn.growagain.codelab.testing.model.Task
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 
 
-@RunWith(AndroidJUnit4::class)
 class TasksViewModelTest {
 
     private lateinit var tasksViewModel: TasksViewModel
+    private lateinit var tasksRepository: FakeTaskRepository
 
     @Before
     fun setup() {
-        tasksViewModel = TasksViewModel(ApplicationProvider.getApplicationContext())
+         tasksRepository = FakeTaskRepository()
+        val task1 = Task("Title1", "Description1")
+        val task2 = Task("Title2", "Description2", isCompleted = true)
+        val task3 = Task("Title3", "Description3", isCompleted = true)
+        tasksRepository.addTasks(task1, task2, task3)
     }
 
     @Test

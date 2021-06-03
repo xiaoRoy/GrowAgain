@@ -1,11 +1,11 @@
-package com.learn.growagain.codelab.testing.data.source
+package com.learn.growagain.codelab.testing.data
 
-import com.learn.growagain.codelab.testing.data.Result
+import com.learn.growagain.codelab.testing.data.source.FakeDataSource
+import com.learn.growagain.codelab.testing.data.source.TaskRepository
 import com.learn.growagain.codelab.testing.model.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -26,11 +26,18 @@ class TaskRepositoryTest {
 
     @Before
     fun setup() {
-        tasksRemoteDataSource = FakeDataSource(remoteTasks.toMutableList())
-        tasksLocalDataSource = FakeDataSource(localTasks.toMutableList())
-        tasksRepository = TaskRepository(
-            tasksRemoteDataSource, tasksLocalDataSource, Dispatchers.Unconfined
-        )
+        tasksRemoteDataSource =
+            FakeDataSource(
+                remoteTasks.toMutableList()
+            )
+        tasksLocalDataSource =
+            FakeDataSource(
+                localTasks.toMutableList()
+            )
+        tasksRepository =
+            TaskRepository(
+                tasksRemoteDataSource, tasksLocalDataSource, Dispatchers.Unconfined
+            )
     }
 
     @Test
