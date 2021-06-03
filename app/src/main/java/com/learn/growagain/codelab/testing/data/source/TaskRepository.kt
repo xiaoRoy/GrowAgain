@@ -16,9 +16,9 @@ class TaskRepository(
     private val taskRemoteDataSource: TaskDataSource,
     private val taskLocalDataSource: TaskDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) {
+) : ITaskRepository {
 
-    suspend fun getAllTasks(forceUpdate: Boolean): Result<List<Task>> {
+    override suspend fun getAllTasks(forceUpdate: Boolean): Result<List<Task>> {
         if (forceUpdate) {
             try {
                 saveAllTasksToLocalFromRemote()
@@ -45,11 +45,11 @@ class TaskRepository(
         }
     }
 
-    suspend fun reloadAllTasks() {
+    override suspend fun reloadAllTasks() {
         saveAllTasksToLocalFromRemote()
     }
 
-    suspend fun saveTask(task: Task) {
+    override suspend fun saveTask(task: Task) {
         coroutineScope {
             //if the first task fails, the second one will be cancelled
             //exception thrown from launch is consider as a uncaught exception
