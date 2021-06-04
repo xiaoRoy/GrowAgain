@@ -9,4 +9,7 @@ interface ITaskRepository {
     suspend fun reloadAllTasks()
 
     suspend fun saveTask(task: Task)
+
+    suspend fun getTask(taskId: String, forceUpdate: Boolean = false)
+
 }

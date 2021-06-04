@@ -4,7 +4,7 @@ import com.learn.growagain.codelab.testing.data.source.ITaskRepository
 import com.learn.growagain.codelab.testing.model.Task
 import kotlinx.coroutines.runBlocking
 
-class FakeTaskRepository: ITaskRepository {
+class FakeTaskRepository : ITaskRepository {
 
     var taskMap: LinkedHashMap<String, Task> = LinkedHashMap()
 
@@ -20,7 +20,9 @@ class FakeTaskRepository: ITaskRepository {
         TODO("not implemented")
     }
 
-
+    override suspend fun getTask(taskId: String, forceUpdate: Boolean) {
+        TODO("not implemented")
+    }
 
     fun addTasks(vararg tasks: Task) {
         tasks.forEach {

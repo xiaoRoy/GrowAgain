@@ -53,6 +53,7 @@ dependencies {
     implementation libraies
     kapt librariesKapt
 
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_ktx_version"
 
     testImplementation 'junit:junit:4.+'
     testImplementation "androidx.test:core:$androidTestCoreVersion"
@@ -64,6 +65,7 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion"
 
+    androidTestImplementation 'junit:junit:4.+'
     androidTestImplementation "androidx.test:core:$androidTestCoreVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
     androidTestImplementation "com.google.truth:truth:$truthVersion"
@@ -71,4 +73,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test:rules:$coreJUnitRuleVersion"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiautomatorVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion"
+
 }

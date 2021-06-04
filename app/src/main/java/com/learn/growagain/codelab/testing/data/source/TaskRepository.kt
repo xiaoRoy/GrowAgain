@@ -61,6 +61,13 @@ class TaskRepository(
     private suspend fun saveSingleTaskToLocalFromRemote(taskId: String) {
     }
 
+    override suspend fun getTask(taskId: String, forceUpdate: Boolean) {
+        if(forceUpdate) {
+
+        }
+
+    }
+
     companion object {
 
         @Volatile
