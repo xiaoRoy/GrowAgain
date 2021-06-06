@@ -3,6 +3,7 @@ package com.learn.growagain.codelab.testing.data.source.local
 import com.learn.growagain.codelab.testing.data.Result
 import com.learn.growagain.codelab.testing.data.Result.Success
 import com.learn.growagain.codelab.testing.data.Result.Error
+import com.learn.growagain.codelab.testing.data.TaskNotFoundByIdException
 import com.learn.growagain.codelab.testing.data.source.TaskDataSource
 import com.learn.growagain.codelab.testing.model.Task
 import kotlinx.coroutines.CoroutineDispatcher
@@ -32,5 +33,18 @@ class TaskLocalDataSource(
 
     override suspend fun deleteAllTasks() {
         TODO("not implemented")
+    }
+
+    override suspend fun getTask(taskId: String): Result<Task> = withContext(ioDispatcher) {
+        try {
+            val task = taskDao.getTaskById(taskId)
+            if (task == null) {
+                Error(TaskNotFoundByIdException())
+            } else {
+                Success(task)
+            }
+        } catch (exception: Exception) {
+            Error(exception)
+        }
     }
 }

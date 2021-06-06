@@ -3,4 +3,6 @@
 
     <dimen name="character_item_height">32dp</dimen>
     <dimen name="character_loading_size">50dp</dimen>
+
+    <dimen name="padding_normal">16dp</dimen>
 </resources>

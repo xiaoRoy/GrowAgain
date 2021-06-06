@@ -20,7 +20,7 @@ class FakeTaskRepository : ITaskRepository {
         TODO("not implemented")
     }
 
-    override suspend fun getTask(taskId: String, forceUpdate: Boolean) {
+    override suspend fun getTask(taskId: String, forceUpdate: Boolean): Result<Task> {
         TODO("not implemented")
     }
 

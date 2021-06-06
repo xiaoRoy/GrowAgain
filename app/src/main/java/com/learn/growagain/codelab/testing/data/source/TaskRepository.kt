@@ -59,13 +59,17 @@ class TaskRepository(
     }
 
     private suspend fun saveSingleTaskToLocalFromRemote(taskId: String) {
+        val remoteTask = taskRemoteDataSource.getTask(taskId)
+        if(remoteTask is Result.Success) {
+            taskLocalDataSource.saveTask(remoteTask.data)
+        }
     }
 
-    override suspend fun getTask(taskId: String, forceUpdate: Boolean) {
+    override suspend fun getTask(taskId: String, forceUpdate: Boolean): Result<Task> {
         if(forceUpdate) {
-
+            saveSingleTaskToLocalFromRemote(taskId)
         }
-
+        return taskLocalDataSource.getTask(taskId)
     }
 
     companion object {
