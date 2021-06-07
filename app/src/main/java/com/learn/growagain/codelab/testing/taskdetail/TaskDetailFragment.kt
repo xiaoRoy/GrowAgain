@@ -57,9 +57,7 @@ class TaskDetailFragment : Fragment() {
         })
 
         viewModel.hasTask.observe(viewLifecycleOwner, Observer { hasTask ->
-            println("trail.hasTask:$hasTask")
             if (hasTask) {
-
                 layoutNoTasks.visibility = View.GONE
                 layoutTask.visibility = View.VISIBLE
             } else {

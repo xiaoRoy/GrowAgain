@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.learn.growagain.codelab.testing.model.Task
 
 @Database(entities = [Task::class], version = 1, exportSchema = false)
-abstract class TaskDataBase: RoomDatabase() {
+abstract class TaskDatabase: RoomDatabase() {
 
     abstract fun taskDao(): TaskDao
 }

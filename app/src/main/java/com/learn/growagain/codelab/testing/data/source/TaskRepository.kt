@@ -3,7 +3,7 @@ package com.learn.growagain.codelab.testing.data.source
 import android.app.Application
 import androidx.room.Room
 import com.learn.growagain.codelab.testing.data.Result
-import com.learn.growagain.codelab.testing.data.source.local.TaskDataBase
+import com.learn.growagain.codelab.testing.data.source.local.TaskDatabase
 import com.learn.growagain.codelab.testing.data.source.local.TaskLocalDataSource
 import com.learn.growagain.codelab.testing.data.source.remote.TaskRemoteDataSource
 import com.learn.growagain.codelab.testing.model.Task
@@ -80,7 +80,7 @@ class TaskRepository(
         fun getInstance(application: Application): TaskRepository {
             return INSTANCE ?: synchronized(this) {
                 val dataBase =
-                    Room.databaseBuilder(application, TaskDataBase::class.java, "Tasks.db").build()
+                    Room.databaseBuilder(application, TaskDatabase::class.java, "Tasks.db").build()
                 return TaskRepository(
                     TaskRemoteDataSource,
                     TaskLocalDataSource(dataBase.taskDao())
