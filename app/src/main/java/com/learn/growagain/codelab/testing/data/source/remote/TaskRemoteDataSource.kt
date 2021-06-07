@@ -1,11 +1,12 @@
 package com.learn.growagain.codelab.testing.data.source.remote
 
 import com.learn.growagain.codelab.testing.data.Result
+import com.learn.growagain.codelab.testing.data.TaskNotFoundByIdException
 import com.learn.growagain.codelab.testing.data.source.TaskDataSource
 import com.learn.growagain.codelab.testing.model.Task
 import kotlinx.coroutines.delay
 
-object TaskRemoteDataSource: TaskDataSource {
+object TaskRemoteDataSource : TaskDataSource {
 
     private const val SERVICE_DELAY = 2000L
 
@@ -31,8 +32,17 @@ object TaskRemoteDataSource: TaskDataSource {
         TODO("not implemented")
     }
 
+    override suspend fun getTask(taskId: String): Result<Task> {
+        delay(SERVICE_DELAY)
+        return TASKS[taskId]?.run { Result.Success(this) }
+            ?: Result.Error(TaskNotFoundByIdException())
+    }
+
     private fun addTask(title: String, description: String) {
         val task = Task(title, description)
         TASKS[task.id] = task
     }
+
+
 }
+

@@ -22,4 +22,8 @@ class FakeDataSource(var tasks: MutableList<Task>?) : TaskDataSource {
     override suspend fun deleteAllTasks() {
         tasks?.clear()
     }
+
+    override suspend fun getTask(taskId: String): Result<Task> {
+        TODO("not implemented")
+    }
 }

@@ -10,6 +10,6 @@ interface ITaskRepository {
 
     suspend fun saveTask(task: Task)
 
-    suspend fun getTask(taskId: String, forceUpdate: Boolean = false)
+    suspend fun getTask(taskId: String, forceUpdate: Boolean = false): Result<Task>
 
 }

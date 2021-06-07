@@ -4,4 +4,8 @@
     <string name="hello_world">Hello World!</string>
 
     <string name="click_to_start">Click to Start</string>
+
+    <string name="loading_task_error">Error while loading task</string>
+
+    <string name="no_task">No tasks</string>
 </resources>
