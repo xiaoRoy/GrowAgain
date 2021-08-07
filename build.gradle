@@ -37,6 +37,7 @@ ext {
     def truth_version = '1.0'
     def room_version = '2.2.2'
     def work_version = '2.2.0'
+    def dagger_version = "2.27"
 
 
     libraies = [
@@ -52,9 +53,11 @@ ext {
             "com.google.code.gson:gson:$gson_version",
             "com.squareup.retrofit2:converter-gson:$retrofit_gson_version",
             "com.squareup.retrofit2:retrofit:$retrofit_version",
+            "com.google.dagger:dagger:$dagger_version",
     ]
     librariesKapt = [
             "androidx.room:room-compiler:$room_version",
+            "com.google.dagger:dagger-compiler:$dagger_version",
     ]
 
 }
