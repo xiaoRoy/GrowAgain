@@ -1,4 +1,6 @@
 package com.learn.growagain.tutorial.dagger.login.data
 
-class UserLocalDataSource {
+import javax.inject.Inject
+
+class UserLocalDataSource @Inject constructor() {
 }
