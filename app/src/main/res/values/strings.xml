@@ -8,4 +8,15 @@
     <string name="loading_task_error">Error while loading task</string>
 
     <string name="no_task">No tasks</string>
+
+
+    <!--Espresso -->
+    <string name="send">Send</string>
+    <string name="send_hint">Enter Your Message Here</string>
+    <string name="header_reply">Reply Received</string>
+
+    <string name="message_received">Message Received</string>
+    <string name="reply">Reply</string>
+    <string name="replay_hint">Enter Your Reply Here</string>
+    <!--End of Espresso -->
 </resources>
