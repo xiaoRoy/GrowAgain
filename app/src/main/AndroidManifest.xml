@@ -12,13 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GrowAgain">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".codelab.coroutine.CoroutineActivity" />
+        <activity android:name=".codelab.espresso.FirstEspressoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".codelab.coroutine.CoroutineActivity" />
+        <activity android:name=".codelab.espresso.SecondEspressoActivity" />
 
         <uses-library
             android:name="android.test.base"
