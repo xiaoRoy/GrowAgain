@@ -18,5 +18,16 @@
     <string name="message_received">Message Received</string>
     <string name="reply">Reply</string>
     <string name="replay_hint">Enter Your Reply Here</string>
+
+    <string name="hint_phone_number">Enter a phone number</string>
+    <string name="phone_number_label">Phone Number:</string>
+    <string name="nothing_entered">Nothing entered</string>
+
+    <string-array name="phone_types">
+        <item>Home</item>
+        <item>Work</item>
+        <item>Mobile</item>
+        <item>Other</item>
+    </string-array>
     <!--End of Espresso -->
 </resources>
